@@ -16,16 +16,16 @@ module Plaid
       parse_response(post('/auth/step', access_token, mfa: code, type: type), 0)
     end
 
-    def mfa_connect_step(access_token,code)
+    def mfa_connect_step(access_token, code)
       parse_response(post('/connect/step', access_token, mfa: code),1)
     end
 
-    def get_transactions(access_token)
-      parse_response(get('/connect', access_token),2)
+    def get_transactions(access_token, options={})
+      parse_response(get('/connect', access_token, options),2)
     end
 
-    def delete_account(access_token)
-      parse_response(delete('/connect', access_token),3)
+    def delete_account(access_token, options={})
+      parse_response(delete('/connect', access_token, options),3)
     end
 
     protected
