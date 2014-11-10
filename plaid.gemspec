@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'plaid'
-  s.version     = '0.1.6'
+  s.version     = '0.1.7'
   s.date        = '2014-04-11'
   s.summary     = 'Plaid Ruby Gem'
   s.description = 'Ruby Gem wrapper for Plaid API.'
