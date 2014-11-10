@@ -30,7 +30,7 @@ module Plaid
 
     protected
 
-    def parse_response(response,method)
+    def parse_response(response, method)
       parsed = JSON.parse(response)
       if response.code == '200'
         case method
@@ -50,7 +50,7 @@ module Plaid
 
     private
 
-    def get(path,access_token)
+    def get(path, access_token, options)
       url = BASE_URL + path
       RestClient.get(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
     end
