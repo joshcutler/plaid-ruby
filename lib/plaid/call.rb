@@ -12,14 +12,14 @@ module Plaid
    
     # This is a specific route for auth,
     # it returns specific acct info
-    def add_account_auth(type, username, password, email)
-      parse_auth_response(post('/auth', type, username, password, email))
+    def add_account_auth(type, username, password, email, options={})
+      parse_auth_response(post('/auth', type, username, password, email, options))
     end
    
     # This is a specific route for connect,
     # it returns transaction information
-    def add_account_connect(type,username,password,email)
-      parse_connect_response(post('/connect',type,username,password,email))
+    def add_account_connect(type, username, password, email, options={})
+      parse_connect_response(post('/connect', type, username, password, email, options))
     end
 
     def get_place(id)
@@ -69,9 +69,17 @@ module Plaid
 
     private
 
-    def post(path,type,username,password,email)
+    def post(path, type, username, password, email, options={})
       url = BASE_URL + path
-      RestClient.post url, client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret'), type: type ,credentials: {username: username, password: password} ,email: email
+      RestClient.post url, client_id: self.instance_variable_get(:'@customer_id'), 
+        secret: self.instance_variable_get(:'@secret'), 
+        type: type,
+        credentials: {
+          username: username, 
+          password: password
+        }, 
+        email: email,
+        options: options
     end
 
     def get(path,id = nil)
