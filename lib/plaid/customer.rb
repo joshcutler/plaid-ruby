@@ -52,7 +52,7 @@ module Plaid
 
     def get(path, access_token, options)
       url = BASE_URL + path
-      RestClient.get(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
+      RestClient.get(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token}.merge(options))
     end
 
     def post(path,access_token,options={})
