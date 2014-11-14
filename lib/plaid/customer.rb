@@ -21,7 +21,7 @@ module Plaid
     end
 
     def get_transactions(access_token, options={})
-      parse_response(get('/connect', access_token, options),2)
+      parse_response(post('/connect/get', access_token, options),2)
     end
 
     def delete_account(access_token, options={})
@@ -57,7 +57,7 @@ module Plaid
 
     def post(path,access_token,options={})
       url = BASE_URL + path
-      RestClient.post url, client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token, mfa: options[:mfa], type: options[:type]
+      RestClient.post(url, {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token}.merge(options))
     end
 
     def delete(path,access_token)
